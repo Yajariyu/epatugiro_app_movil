@@ -1,0 +1,85 @@
+//Montserrat Style Font
+$font-family-md-base: "Inconsolata", monospace !important;
+$font-family-ios-base: "Inconsolata", monospace !important;
+$font-family-wp-base: "Inconsolata", monospace !important;
+$font-family-base: "Inconsolata", monospace !important;
+
+body,
+h1,
+h2,
+h3,
+p,
+button,
+ion-title {
+  font-family: "Inconsolata", monospace !important;
+}
+
+h1 {
+  color: var(--ion-color-dark);
+  font-weight: bold;
+}
+
+h2 {
+  color: var(--ion-color-dark);
+  font-weight: 400;
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+h3 {
+  color: var(--ion-color-dark);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+p {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 300;
+  color: var(--ion-color-light);
+}
+
+a {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 300;
+  color: var(--ion-color-primary);
+  text-decoration: none !important;
+}
+
+@font-face {
+  font-family: "Inconsolata", monospace !important;
+  font-style: light;
+  font-weight: 300;
+  src: url("/assets/fonts/inconsolata/Inconsolata-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Inconsolata", monospace !important;
+  font-style: normal;
+  font-weight: 400;
+  src: url("/assets/fonts/inconsolata/Inconsolata-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Inconsolata", monospace !important;
+  font-style: semi-bold;
+  font-weight: 600;
+  src: url("/assets/fonts/inconsolata/Inconsolata-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Inconsolata", monospace !important;
+  font-style: bold;
+  font-weight: 700;
+  src: url("/assets/fonts/inconsolata/Inconsolata-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Inconsolata", monospace !important;
+  font-style: extra-bold;
+  font-weight: 900;
+  src: url("/assets/fonts/inconsolata/Inconsolata-Bold.ttf");
+}

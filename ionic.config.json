@@ -1,0 +1,7 @@
+{
+  "name": "Uber",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

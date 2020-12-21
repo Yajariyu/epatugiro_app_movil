@@ -1,0 +1,41 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="content1">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle
+          *ngFor="let pages of navigate"
+          auto-hide="true"
+          color="primary"
+        >
+          <ion-item
+            lines="none"
+            [routerLink]="pages.url"
+            routerDirection="forward"
+            color="primary"
+          >
+            <ion-icon [name]="pages.icon" slot="start"></ion-icon>
+            {{ pages.title }}
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="true" color="primary">
+          <ion-item
+            lines="none"
+            routerDirection="forward"
+            color="primary"
+            (click)="cerrarSesion()"
+          >
+            <ion-icon name="log-out" slot="start"></ion-icon>
+            Cerrar sesion
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content1"></ion-router-outlet>
+</ion-app>

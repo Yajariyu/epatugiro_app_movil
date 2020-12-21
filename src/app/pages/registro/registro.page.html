@@ -1,0 +1,139 @@
+<ion-content class="form-content ion-padding">
+  <ion-grid style="height: 100%">
+    <ion-row class="ion-align-items-center ion-justify-content-center">
+      <form
+        class="form"
+        [formGroup]="validations_form"
+        (ngSubmit)="tryRegister(validations_form.value)"
+      >
+        <ion-item>
+          <ion-input
+            style="text-transform: uppercase"
+            autocapitalize="characters"
+            type="text"
+            formControlName="nombre"
+            placeholder="Ingresa tu nombre"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.nombre">
+            <div
+              class="error-message"
+              *ngIf="
+                validations_form.get('nombre').hasError(validation.type) &&
+                (validations_form.get('nombre').dirty ||
+                  validations_form.get('nombre').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item>
+          <ion-input
+            style="text-transform: uppercase"
+            autocapitalize="characters"
+            type="text"
+            formControlName="apellido"
+            placeholder="Ingresa tus apellidos"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.apellido">
+            <div
+              class="error-message"
+              *ngIf="
+                validations_form.get('apellido').hasError(validation.type) &&
+                (validations_form.get('apellido').dirty ||
+                  validations_form.get('apellido').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="number"
+            formControlName="numero_telefono"
+            placeholder="Ingresa tu numero de telefono"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container
+            *ngFor="let validation of validation_messages.numero_telefono"
+          >
+            <div
+              class="error-message"
+              *ngIf="
+                validations_form.get('numero_telefono').hasError(validation.type) &&
+                (validations_form.get('numero_telefono').dirty ||
+                  validations_form.get('numero_telefono').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="text"
+            formControlName="email"
+            placeholder="Ingresa tu email"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div
+              class="error-message"
+              *ngIf="
+                validations_form.get('email').hasError(validation.type) &&
+                (validations_form.get('email').dirty ||
+                  validations_form.get('email').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <ion-item>
+          <ion-input
+            type="password"
+            formControlName="password"
+            placeholder="Contraseña"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.password">
+            <div
+              class="error-message"
+              *ngIf="
+                validations_form.get('password').hasError(validation.type) &&
+                (validations_form.get('password').dirty ||
+                  validations_form.get('password').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="ion-text-center">
+          <ion-button
+            class="register-button"
+            type="submit"
+            [disabled]="!validations_form.valid"
+            >Registrar
+          </ion-button>
+          <p class="go-to-login">
+            Ya tienes cuenta? <a href="/login">Intenta logear.</a>
+          </p>
+        </div>
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>

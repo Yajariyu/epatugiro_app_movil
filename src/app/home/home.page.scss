@@ -1,0 +1,40 @@
+.item.sc-ion-label-md-h,
+.item .sc-ion-label-md-h {
+  white-space: normal !important;
+  font-size: 0.8em;
+}
+
+.alert-radio-label.sc-ion-alert-md {
+  white-space: inherit !important;
+  font-size: 5px !important;
+}
+
+ion-input {
+  font-size: 0.7em;
+}
+
+img {
+  object-fit: contain;
+}
+
+ion-item {
+  --highlight-color-valid: var(--ion-color-warning, #f49c14) !important;
+}
+
+ion-label {
+  color: grey !important;
+}
+
+ion-input {
+  --placeholder-color: grey;
+  --placeholder-opacity: 1;
+}
+
+ion-button {
+  margin-bottom: 10px;
+}
+
+ion-content {
+  justify-content: center;
+  text-align: center;
+}

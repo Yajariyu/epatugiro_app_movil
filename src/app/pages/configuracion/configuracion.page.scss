@@ -1,0 +1,37 @@
+ion-content {
+  position: relative;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.contenido {
+  height: 100%;
+}
+.contenido > img {
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.2;
+  z-index: -100;
+  margin: auto;
+  align-self: center;
+}
+
+.contenido > ion-list {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+ion-list {
+  width: 100%;
+}
+
+ion-list {
+  --ion-item-background: transparent;
+}
+
+ion-item {
+  --background: transparent !important;
+  --border-color: transparent !important;
+}

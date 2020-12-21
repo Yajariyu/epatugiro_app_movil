@@ -1,0 +1,45 @@
+.form {
+  min-width: 250px !important;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 40%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+@media (max-height: 550px) {
+  img {
+    display: none;
+  }
+}
+
+.validation-errors {
+  min-height: 25px;
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+  text-align: right;
+  font-size: 0.8em;
+  padding-top: 5px;
+}
+
+ion-input {
+  --color: var(--ion-color-medium);
+  --placeholder-font-weight: 400;
+}
+
+ion-item {
+  --padding-start: 0px;
+}
+
+ion-button {
+  --border-radius: 50px;
+  --box-shadow: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 40px;
+}

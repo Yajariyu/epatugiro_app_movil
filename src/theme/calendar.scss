@@ -1,0 +1,427 @@
+//Flat style calendar
+.flatCalendar {
+  //Allow a square cell with same height and width
+  .monthview-datetable td {
+    padding: 0 !important;
+    border-radius: 50%;
+  }
+
+  .square {
+    position: relative;
+  }
+
+  .square:before {
+    content: "";
+    padding-top: 100%;
+    display: block;
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex; // make us of Flexbox
+    align-items: center; // does vertically center the desired content
+    justify-content: center; // horizontally centers single line items
+    text-align: center; // optional, but helps horizontally center text that breaks into multiple lines
+  }
+
+  .monthview-datetable {
+    background-color: white !important;
+  }
+
+  .monthview-current {
+    font-weight: bold !important;
+  }
+
+  .monthview-primary-with-event {
+    background-color: white !important;
+    color: var(--ion-color-dark) !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: orange !important;
+    border-bottom-width: 2px !important;
+  }
+
+  .monthview-secondary-with-event {
+    background-color: white !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: #737959 !important;
+    border-bottom-width: 2px !important;
+  }
+
+  .text-muted {
+    color: var(--ion-color-light) !important;
+  }
+
+  .event-detail-container {
+    border-top: 0px !important;
+  }
+
+  .monthview-selected {
+    background-color: var(--ion-color-dark) !important;
+    color: white !important;
+  }
+
+  //START WEEKVIEW CUSTOMIZATION
+
+  .weekview-with-event {
+    background: var(--ion-color-dark) !important;
+  }
+
+  .dayview-with-event {
+    background: var(--ion-color-secondary) !important;
+  }
+
+  //Top weekview row
+  .weekview-allday-table {
+    border-width: 0px !important;
+    .table > tbody > tr > td,
+    .table > tfoot > tr > td {
+      vertical-align: middle !important;
+    }
+
+    //All day event
+    .calendar-event-inner {
+      background: white !important;
+    }
+  }
+
+  .weekview-allday-content-table td {
+    border-left: 1px solid var(--ion-color-light-background) !important;
+    border-right: 1px solid var(--ion-color-light-background) !important;
+  }
+
+  //Applied to the all day label in week view
+  .weekview-allday-label {
+    background: var(--ion-color-light-background) !important;
+    color: var(--ion-color-dark) !important;
+  }
+
+  .weekview-normal-event-table {
+    //background: red;
+  }
+
+  .weekview-allday-label {
+    width: 50px !important; //column width
+    padding-top: 16px;
+    border-width: 0px;
+  }
+
+  .weekview-header {
+    background-color: var(--ion-color-light-background) !important;
+  }
+
+  //The date having events, applied to the day header in week view
+  .weekview-with-event {
+  }
+
+  //The current date, applied to the day header in week view
+  .week-view-current {
+  }
+
+  //The selected date, applied to the day header in week view
+  .weekview-selected {
+    background: var(--ion-color-dark) !important;
+    color: white !important;
+  }
+
+  .calendar-event-inner {
+    background: var(--ion-color-primary) !important;
+    border-radius: 5px;
+    color: white !important;
+    padding-top: 5px;
+    padding-left: 3px;
+    font-size: 10px;
+    line-height: 15px;
+    height: 100%;
+    text-align: left;
+  }
+
+  //END WEEKVIEW CUSTOMIZATION
+
+  .avatarDayView {
+    margin-left: 10px;
+    margin-top: 10px;
+    float: right;
+    margin-right: 10px;
+    max-width: 39px !important;
+    border-radius: 50%;
+  }
+
+  .titleDayView {
+    margin-left: 10px;
+    font-size: 16px !important;
+    color: white !important;
+  }
+
+  .descriptionDayView {
+    margin-left: 10px;
+    font-size: 12px !important;
+    color: white !important;
+  }
+
+  .dayview-allday-table {
+    //display: none;
+  }
+
+  .dayview-normal-event-container {
+    margin-top: 0 !important;
+  }
+
+  .dayview-allday-table {
+    .calendar-event-inner {
+      background: var(--ion-color-secondary) !important;
+    }
+  }
+
+  //adjust the hour column width in weekview and dayview
+  .calendar-hour-column,
+  .dayview-allday-label {
+    width: 50px !important;
+  }
+
+  .calendar-hour-column {
+    background-color: var(--ion-color-light-background) !important;
+  }
+
+  /*
+    //Dot
+    .point {
+        position: relative;
+        background-color: red;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        left: 26px;
+        bottom: 18px;
+    }
+    */
+
+  //for single events
+  .solidLineSingle {
+    width: 100%;
+    height: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--ion-color-secondary);
+    border-bottom-width: 1px;
+  }
+
+  //for multiple events
+  .solidLineMulti {
+    width: 100%;
+    height: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--ion-color-primary);
+    border-bottom-width: 1px;
+    padding-bottom: 2px;
+  }
+
+  //for multiple events
+  .dashedLineMulti {
+    width: 100%;
+    height: 1px;
+    border-bottom-style: dashed;
+    border-bottom-color: var(--ion-color-primary);
+    border-bottom-width: 1px;
+    padding-bottom: 2px;
+  }
+
+  .table > thead > tr > th,
+  .table > thead:first-child > tr:first-child > th,
+  .table > thead:first-child > tr:first-child > td,
+  .table > tbody + tbody,
+  .table-bordered,
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > tfoot > tr > td {
+    border: 0px !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 500 !important;
+  }
+
+  //Head
+  .table > thead > tr > th,
+  .table > thead:first-child > tr:first-child > th,
+  .table > thead:first-child > tr:first-child > td {
+    border: 0px !important;
+    text-transform: uppercase;
+    color: var(--ion-color-medium);
+    font-size: 11px;
+    font-weight: 400 !important;
+  }
+
+  .table > thead > tr > th,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > tbody > tr > td,
+  .table > tfoot > tr > td {
+    //line-height: 36px !important;
+  }
+
+  //Body
+  .table > tbody + tbody,
+  .table-bordered,
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > tfoot > tr > td {
+    font-size: 13px;
+  }
+
+  //Body
+  .table > tbody + tbody,
+  .table-bordered,
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td {
+    font-size: 13px;
+    color: var(--ion-color-dark);
+  }
+}
+
+//Dark style calendar
+.darkCalendar {
+  ion-slides {
+    padding-bottom: 10px;
+    background-color: var(--ion-color-dark-background) !important;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.4) 2px 2px 30px;
+  }
+
+  //Allow a square cell with same height and width
+  .monthview-datetable td {
+    padding: 0 !important;
+    border-radius: 50%;
+  }
+
+  .square {
+    position: relative;
+  }
+
+  .square:before {
+    content: "";
+    padding-top: 100%;
+    display: block;
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex; // make us of Flexbox
+    align-items: center; // does vertically center the desired content
+    justify-content: center; // horizontally centers single line items
+    text-align: center; // optional, but helps horizontally center text that breaks into multiple lines
+  }
+
+  .monthview-datetable {
+    background-color: var(--ion-color-dark-background) !important;
+  }
+
+  .monthview-current {
+    font-weight: bold !important;
+    background-color: #2d2d2d !important;
+  }
+
+  .monthview-primary-with-event {
+    background-color: var(--ion-color-dark-background) !important;
+    color: var(--ion-color-dark-primary) !important;
+  }
+
+  .monthview-secondary-with-event {
+    background-color: var(--ion-color-dark-background) !important;
+  }
+
+  .text-muted {
+    color: var(--ion-color-font-secondary) !important;
+  }
+
+  .event-detail-container {
+    border-top: 0px !important;
+  }
+
+  .monthview-selected {
+    background-color: var(--ion-color-dark-primary) !important;
+    color: var(--ion-color-dark-background) !important;
+
+    .point {
+      background-color: var(--ion-color-dark-background) !important;
+    }
+  }
+
+  //Dot
+  .point {
+    background-color: var(--ion-color-dark-primary);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin: auto;
+  }
+
+  .table > thead > tr > th,
+  .table > thead:first-child > tr:first-child > th,
+  .table > thead:first-child > tr:first-child > td,
+  .table > tbody + tbody,
+  .table-bordered,
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > tfoot > tr > td {
+    border: 0px !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-weight: 500 !important;
+  }
+
+  //Head
+  .table > thead > tr > th,
+  .table > thead:first-child > tr:first-child > th,
+  .table > thead:first-child > tr:first-child > td {
+    border: 0px !important;
+    text-transform: uppercase;
+    color: var(--ion-color-dark-primary);
+    font-size: 12px;
+    font-weight: 600 !important;
+  }
+
+  .table > thead > tr > th,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > tbody > tr > td,
+  .table > tfoot > tr > td {
+    //line-height: 36px !important;
+  }
+
+  //Body
+  .table > tbody + tbody,
+  .table-bordered,
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > tfoot > tr > td {
+    font-size: 13px;
+  }
+
+  //Body
+  .table > tbody + tbody,
+  .table-bordered,
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td {
+    font-size: 13px;
+    color: var(--ion-color-dark-primary);
+  }
+}

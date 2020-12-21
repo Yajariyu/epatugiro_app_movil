@@ -1,0 +1,177 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Home </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #bebfc0">
+  <ion-item lines="none">
+    <ion-thumbnail slot="start">
+      <img src="assets/icon/favicon.jpeg" />
+    </ion-thumbnail>
+    <ion-label class="ion-text-center ion-text-wrap">
+      Epatugiro te brinda la mejor tasa del dia:
+      <strong>{{tasa_cambio}}</strong>
+    </ion-label>
+  </ion-item>
+
+  <h3
+    style="padding-bottom: 0px !important; padding-top: 0px !important"
+    class="ion-text-center"
+  >
+    Datos Envío Colombia:
+  </h3>
+
+  <ion-card style="padding-left: 10px; padding-right: 10px">
+    <ion-item >
+      <ion-input
+        style="text-transform: uppercase"
+        autocapitalize="characters"
+        placeholder="Nombre completo de quien REMITE el dinero"
+        [(ngModel)]="cuenta.nombre_emisor"
+        input="text"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Dinero consignado a Epatugiro a través de:</ion-label>
+      <ion-select
+        interface="action-sheet"
+        [(ngModel)]="cuenta.banco_emisor"
+        okText="Aceptar"
+        cancelText="Cancelar"
+      >
+        <ion-select-option
+          *ngFor="let banco of bancos_emisores"
+          value="{{banco.id}}"
+          >{{banco.nombre}}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input
+        type="number"
+        placeholder="Valor consignado en COP $"
+        [(ngModel)]="cuenta.dinero"
+        (ionChange)="calcularBs()"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input
+        placeholder="Valor en Bs a transferir"
+        [(ngModel)]="cuenta.bolivares"
+        input="number"
+        disabled
+      ></ion-input>
+    </ion-item>
+
+    <ion-button style="margin-top: 5px" (click)="abrirCamara()"
+      > Foto de la consignación</ion-button
+    >
+  </ion-card>
+
+  <h3
+    style="padding-bottom: 0px !important; padding-top: 0px !important"
+    class="ion-text-center"
+  >
+    <strong>Datos Venezuela:</strong>
+  </h3>
+
+  <ion-card>
+    <ion-item lines="none">
+      <ion-input
+        style="text-transform: uppercase"
+        autocapitalize="characters"
+        placeholder="Nombre del destinatario (a)"
+        [(ngModel)]="cuenta.nombre_receptor"
+        input="text"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo de Documento</ion-label>
+      <ion-select
+        [(ngModel)]="cuenta.tipo_documento"
+        okText="Aceptar"
+        cancelText="Cancelar"
+      >
+        <ion-select-option value="1">Cédula de identidad</ion-select-option>
+        <ion-select-option value="2">Cédula de extranjería</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-text-wrap">
+      <ion-input
+        style="text-transform: uppercase"
+        autocapitalize="characters"
+        placeholder="Nº documento del destinatario (a)"
+        [(ngModel)]="cuenta.cedula_emisor"
+        input="text"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label
+        >Bancos Venezolano en el que va a recibir la transferencia</ion-label
+      >
+      <ion-select
+        [(ngModel)]="cuenta.banco_receptor"
+        okText="Aceptar"
+        cancelText="Cancelar"
+      >
+        <ion-select-option
+          *ngFor="let banco of bancos_receptores"
+          value="{{banco.id}}"
+          >{{banco.nombre}}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tipo de cuenta</ion-label>
+      <ion-select
+        [(ngModel)]="cuenta.tipo_cuenta"
+        okText="Aceptar"
+        cancelText="Cancelar"
+      >
+        <ion-select-option value="1">Ahorro</ion-select-option>
+        <ion-select-option value="2">Corriente</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input
+        style="text-transform: uppercase"
+        autocapitalize="characters"
+        placeholder="Nº Cuenta del destinatario"
+        [(ngModel)]="cuenta.numero_cuenta_receptor"
+        input="text"
+      ></ion-input>
+    </ion-item>
+
+    <!--
+<ion-item lines="none">
+      <ion-input
+        placeholder="Numero de documento remitente"
+        [(ngModel)]="cuenta.cedula_emisor"
+        input="text"
+      ></ion-input>
+    </ion-item>
+    -->
+  </ion-card>
+
+        <ion-button
+        style="margin-top: 5px"
+        expand="block"
+        fill="outline"
+        (click)="realizarTransferencia()"
+        >Guardar</ion-button
+      >
+
+
+</ion-content>

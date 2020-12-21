@@ -1,0 +1,59 @@
+<ion-content class="ion-padding" scrollY="false">
+  <ion-grid style="height: 100%">
+    <ion-row
+      class="ion-align-items-center ion-justify-content-center"
+      style="height: 100%; display:flex; flex-direction: column"
+    >
+      <img src="assets/icon/favicon.jpeg" id="login_icon"/>
+      <form
+        class="form"
+        [formGroup]="validations_form"
+        (ngSubmit)="tryLogin(validations_form.value)"
+      >
+        <ion-item>
+          <ion-input
+            type="email"
+            formControlName="email"
+            placeholder="Ingresa tu email"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div
+              class="error-message"
+              *ngIf="
+                validations_form.get('email').hasError(validation.type) &&
+                (validations_form.get('email').dirty ||
+                  validations_form.get('email').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item>
+          <ion-input
+            type="password"
+            formControlName="password"
+            placeholder="Contraseña"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-errors ion-text-right">
+          <p><a routerLink="/recovery-password">Olvido su contraseña? </a></p>
+        </div>
+        <div class="ion-text-center">
+          <ion-button
+            type="submit"
+            [disabled]="!validations_form.valid"
+            shape="round"
+            color="primary"
+            >Login
+          </ion-button>
+          <p>
+            No tienes cuenta? <a routerLink="/registro">Crea una cuenta.</a>
+          </p>
+        </div>
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>
