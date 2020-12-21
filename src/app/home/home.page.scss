@@ -23,6 +23,8 @@ ion-item {
 
 ion-label {
   color: grey !important;
+  border: none;
+  margin-bottom: 0px;
 }
 
 ion-input {
@@ -37,4 +39,26 @@ ion-button {
 ion-content {
   justify-content: center;
   text-align: center;
+}
+
+ion-input {
+  padding-left: 16px !important;
+}
+ion-select {
+  width: 100%;
+  max-width: 100% !important;
+  font-size: 14px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+ion-item {
+  --min-height: 30px !important;
+  margin-bottom: 10px;
+}
+
+ion-input {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin-top: 0px;
 }

@@ -26,23 +26,34 @@
   </h3>
 
   <ion-card style="padding-left: 10px; padding-right: 10px">
-    <ion-item >
+    <ion-item lines="none">
+      <ion-label style="width:100%"  >
+        Nombre completo de quien REMITE el dinero
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
       <ion-input
-        style="text-transform: uppercase"
+        style="text-transform: uppercase; border:1px solid lightgray; border-radius: 10px; margin-top: 0px;"
         autocapitalize="characters"
-        placeholder="Nombre completo de quien REMITE el dinero"
         [(ngModel)]="cuenta.nombre_emisor"
         input="text"
       ></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Dinero consignado a Epatugiro a través de:</ion-label>
+    <ion-item lines="none">
+      <ion-label style="width:100%; margin:0"  >
+        Banco en Colombia
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
       <ion-select
         interface="action-sheet"
         [(ngModel)]="cuenta.banco_emisor"
         okText="Aceptar"
         cancelText="Cancelar"
+        placeholder="Dinero consignado a Epatugiro a través de:"
+
       >
         <ion-select-option
           *ngFor="let banco of bancos_emisores"
@@ -52,20 +63,28 @@
       </ion-select>
     </ion-item>
 
-    <ion-item lines="none">
-      <ion-input
-        type="number"
-        placeholder="Valor consignado en COP $"
-        [(ngModel)]="cuenta.dinero"
-        (ionChange)="calcularBs()"
-      ></ion-input>
+    <ion-item lines="none" style="margin:0; padding:0">
+      <ion-label style="width:100%; margin:0"  >
+        Monto a Enviar COP $
+      </ion-label>
     </ion-item>
 
     <ion-item lines="none">
       <ion-input
+        inputmode="decimal"
+        type="tel"
+        placeholder="Valor consignado en COP $"
+        [(ngModel)]="budget"
+        (input)="budget = format(budget)"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" style="margin-top: 20px;">
+      <ion-input
         placeholder="Valor en Bs a transferir"
         [(ngModel)]="cuenta.bolivares"
         input="number"
+        inputmode="decimal"
         disabled
       ></ion-input>
     </ion-item>
@@ -83,27 +102,48 @@
   </h3>
 
   <ion-card>
+
+    <ion-item lines="none">
+      <ion-label style="width:100%; margin:0"  >
+        Nombre del destinatario (a)
+      </ion-label>
+    </ion-item>
+
     <ion-item lines="none">
       <ion-input
         style="text-transform: uppercase"
         autocapitalize="characters"
-        placeholder="Nombre del destinatario (a)"
         [(ngModel)]="cuenta.nombre_receptor"
         input="text"
       ></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Tipo de Documento</ion-label>
+    <ion-item lines="none">
+      <ion-label style="width:100%; margin:0"  >
+        Tipo de Documento
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item lines="none">
       <ion-select
         [(ngModel)]="cuenta.tipo_documento"
         okText="Aceptar"
         cancelText="Cancelar"
+        placeholder="Documento:"
       >
         <ion-select-option value="1">Cédula de identidad</ion-select-option>
         <ion-select-option value="2">Cédula de extranjería</ion-select-option>
       </ion-select>
     </ion-item>
+
+
+    <ion-item lines="none">
+      <ion-label style="width:100%; margin:0"  >
+        Numero Documento
+      </ion-label>
+    </ion-item>
+
 
     <ion-item lines="none" class="ion-text-wrap">
       <ion-input
@@ -115,14 +155,21 @@
       ></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label
-        >Bancos Venezolano en el que va a recibir la transferencia</ion-label
-      >
+
+    <ion-item lines="none">
+      <ion-label style="width:100%; margin:0"  >
+        Bancos Venezolano que recibe la transferencia
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item lines="none">
       <ion-select
         [(ngModel)]="cuenta.banco_receptor"
         okText="Aceptar"
         cancelText="Cancelar"
+        placeholder="Banco Venezuela"
+        lines="none"
       >
         <ion-select-option
           *ngFor="let banco of bancos_receptores"
@@ -132,8 +179,14 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Tipo de cuenta</ion-label>
+    <ion-item lines="none">
+      <ion-label style="width:100%; margin:0"  >
+        Tipo de cuenta
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item lines="none">
       <ion-select
         [(ngModel)]="cuenta.tipo_cuenta"
         okText="Aceptar"
@@ -145,12 +198,15 @@
     </ion-item>
 
     <ion-item lines="none">
+      <ion-label style="width:100%; margin:0"  >
+        Nº Cuenta del destinatario
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
       <ion-input
-        style="text-transform: uppercase"
-        autocapitalize="characters"
-        placeholder="Nº Cuenta del destinatario"
         [(ngModel)]="cuenta.numero_cuenta_receptor"
-        input="text"
+        input="number"
       ></ion-input>
     </ion-item>
 

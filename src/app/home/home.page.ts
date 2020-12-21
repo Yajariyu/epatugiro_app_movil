@@ -36,6 +36,8 @@ export class HomePage {
   public tasa_cambio;
   public image;
   public loading: any;
+  DECIMAL_SEPARATOR=".";
+  GROUP_SEPARATOR=",";
 
   constructor(
     public alertController: AlertController,
@@ -133,7 +135,8 @@ export class HomePage {
   }
 
   calcularBs() {
-    this.cuenta.bolivares = (this.cuenta.dinero / this.tasa_cambio).toFixed(2);
+    const monto =this.cuenta.dinero.replaceAll(",","")
+    this.cuenta.bolivares = (monto / this.tasa_cambio).toFixed(2);
   }
 
   abrirCamara() {
@@ -190,6 +193,38 @@ export class HomePage {
     });
     toast.present();
   }
+
+
+
+  format(valString) {
+    if (!valString) {
+        return '';
+    }
+    let val = valString.toString();
+    const parts = this.unFormat(val).split(this.DECIMAL_SEPARATOR);
+    const monto_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (!parts[1] ? '' : this.DECIMAL_SEPARATOR + parts[1])
+    this.cuenta.dinero=monto_screen
+    this.calcularBs()
+    return monto_screen;
+
+  };
+
+
+  unFormat(val) {
+    if (!val) {
+        return '';
+    }
+    val = val.replace(/^0+/, '');
+
+    if (this.GROUP_SEPARATOR === ',') {
+        return val.replace(/,/g, '');
+    } else {
+        return val.replace(/\./g, '');
+    }
+  };
+
 }
+
+
 
 
