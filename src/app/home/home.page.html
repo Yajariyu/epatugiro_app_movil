@@ -74,12 +74,13 @@
         name="monto"
         placeholder="Valor consignado en COP $"
         [(ngModel)]="cuenta.dinero"
-        (keyup)="format($event.target.value)"
-        (keypress)="format($event.target.value)"
+        (ionInput)="format($event.target.value)"
+        (ngModelChange)="format($event.target.value)"
         input="number"
         inputmode="decimal"
       ></ion-input>
     </ion-item>
+    {{cuenta.dinero}}
 
     <ion-item lines="none" style="margin:0; padding:0">
       <ion-label style="width:100%; margin:0"  >

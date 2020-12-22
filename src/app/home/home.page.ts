@@ -213,9 +213,9 @@ export class HomePage {
     const parts=  this.unFormat(val).split(this.DECIMAL_SEPARATOR);
     const monto_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (parts.length==2? this.DECIMAL_SEPARATOR + parts[1]:'')
     this.cuenta.dinero=monto_screen
-    alert(this.cuenta.dinero)
+    console.log(this.cuenta.dinero)
     this.calcularBs()
-    return this.cuenta.dinero;
+    return monto_screen;
 
   };
 
