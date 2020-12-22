@@ -1,13 +1,19 @@
 .form {
   min-width: 250px !important;
+  max-width: 100%;
+}
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 img {
   display: block;
   margin: 0 auto;
-  max-width: 40%;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  max-width: 60%;
+  padding-top: 5px;
+  padding-bottom: 20px;
 }
 
 @media (max-height: 550px) {
@@ -41,5 +47,5 @@ ion-button {
   --box-shadow: none;
   font-size: 14px;
   font-weight: 600;
-  margin-top: 40px;
+  margin-top: 20px;
 }

@@ -36,8 +36,8 @@ export class HomePage {
   public tasa_cambio;
   public image;
   public loading: any;
-  DECIMAL_SEPARATOR=".";
-  GROUP_SEPARATOR=",";
+  public DECIMAL_SEPARATOR=",";
+  public GROUP_SEPARATOR=".";
 
   constructor(
     public alertController: AlertController,
@@ -135,8 +135,14 @@ export class HomePage {
   }
 
   calcularBs() {
-    const monto =this.cuenta.dinero.replaceAll(",","")
-    this.cuenta.bolivares = (monto / this.tasa_cambio).toFixed(2);
+    let monto= this.cuenta.dinero
+    if(monto.includes('.')) {
+      monto=monto.replaceAll(".","")
+    }
+    if(monto.includes(',')) {
+      monto=monto.replace(",",".")
+    }
+    this.cuenta.bolivares = parseFloat((monto / this.tasa_cambio).toFixed(2));
   }
 
   abrirCamara() {
@@ -200,12 +206,16 @@ export class HomePage {
     if (!valString) {
         return '';
     }
-    let val = valString.toString();
-    const parts = this.unFormat(val).split(this.DECIMAL_SEPARATOR);
-    const monto_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (!parts[1] ? '' : this.DECIMAL_SEPARATOR + parts[1])
+    const val=valString.toString()
+    //const val= this.unFormat(valString)
+    //let value=parseFloat(val)
+    //const monto_screen=value.toLocaleString('de-DE')
+    const parts=  this.unFormat(val).split(this.DECIMAL_SEPARATOR);
+    const monto_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (parts.length==2? this.DECIMAL_SEPARATOR + parts[1]:'')
     this.cuenta.dinero=monto_screen
+    alert(this.cuenta.dinero)
     this.calcularBs()
-    return monto_screen;
+    return this.cuenta.dinero;
 
   };
 
@@ -216,14 +226,29 @@ export class HomePage {
     }
     val = val.replace(/^0+/, '');
 
-    if (this.GROUP_SEPARATOR === ',') {
-        return val.replace(/,/g, '');
-    } else {
-        return val.replace(/\./g, '');
+    if([...val].filter(item => item == ',').length >1) {
+        const indices= this.checkComma(val)
+        val=[...val].splice(0,indices[1])
+        val=val.join('')
     }
+    if (this.GROUP_SEPARATOR === '.') {
+        val=val.replace(/\./g, '');
+        return val
+    }
+    return val
   };
 
+  //Regresa los indices donde se produce comma en el arreglo (string)
+  checkComma(val){
+    const indices= [...val].reduce(function(a, e, i) {
+      if (e === ',')
+          a.push(i);
+      return a;
+       }, []);
+       return indices
+   }
 }
+
 
 
 

@@ -71,15 +71,23 @@
 
     <ion-item lines="none">
       <ion-input
-        inputmode="decimal"
-        type="tel"
+        name="monto"
         placeholder="Valor consignado en COP $"
-        [(ngModel)]="budget"
-        (input)="budget = format(budget)"
+        [(ngModel)]="cuenta.dinero"
+        (keyup)="format($event.target.value)"
+        (change)="format($event.target.value)"
+        input="number"
+        inputmode="decimal"
       ></ion-input>
     </ion-item>
 
-    <ion-item lines="none" style="margin-top: 20px;">
+    <ion-item lines="none" style="margin:0; padding:0">
+      <ion-label style="width:100%; margin:0"  >
+        Monto en Bs
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none" >
       <ion-input
         placeholder="Valor en Bs a transferir"
         [(ngModel)]="cuenta.bolivares"
