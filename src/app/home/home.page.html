@@ -75,7 +75,7 @@
         placeholder="Valor consignado en COP $"
         [(ngModel)]="cuenta.dinero"
         (keyup)="format($event.target.value)"
-        (change)="format($event.target.value)"
+        (keypress)="format($event.target.value)"
         input="number"
         inputmode="decimal"
       ></ion-input>
