@@ -38,8 +38,10 @@ export class HomePage {
   public loading: any;
   public DECIMAL_SEPARATOR=",";
   public GROUP_SEPARATOR=".";
-  public monto_bolivar_screen=null
-  public monto_cop_screen=null
+  public monto_bolivar_screen=null;
+  public monto_cop_screen=null;
+  public monto=null;
+
   public mensajes:any= {
     nombre_emisor:"Falta Nombre del remitente en Colombia",
     dinero: "Falta Monto en pesos",
@@ -159,10 +161,23 @@ export class HomePage {
   }
 
   calcularBs() {
-    console.log(this.cuenta.dinero)
+    console.log(this.monto_cop_screen)
+    this.cuenta.dinero=this.monto_cop_screen
+    if(this.cuenta.dinero==0 || this.cuenta.dinero==null) {
+      return this.monto_bolivar_screen=parseFloat("0").toLocaleString('de-DE')
+    }
+    this.cuenta.dinero=this.monto_cop_screen.toString()
+    if(this.cuenta.dinero.includes('.')) {
+      this.cuenta.dinero=this.cuenta.dinero.replaceAll(".","")
+    }
+    if(this.cuenta.dinero.includes(',')) {
+      this.cuenta.dinero=this.cuenta.dinero.replace(",",".")
+    }
+    this.cuenta.dinero=parseFloat(this.cuenta.dinero).toFixed(2)
+
     if(this.cuenta.dinero) {
       this.cuenta.bolivares = (this.cuenta.dinero / this.tasa_cambio).toFixed(2);
-      this.monto_bolivar_screen=parseFloat(this.cuenta.bolivares).toLocaleString('de-DE')
+      return this.monto_bolivar_screen=parseFloat(this.cuenta.bolivares).toLocaleString('de-DE')
     }
   }
 
@@ -229,17 +244,9 @@ export class HomePage {
     }
     const val=valString.toString()
     const parts=  this.unFormat(val).split(this.DECIMAL_SEPARATOR);
-    this.monto_cop_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (parts.length==2? this.DECIMAL_SEPARATOR + parts[1]:'')
-    this.cuenta.dinero=this.monto_cop_screen
-    if(this.cuenta.dinero.includes('.')) {
-      this.cuenta.dinero=this.cuenta.dinero.replaceAll(".","")
-    }
-    if(this.cuenta.dinero.includes(',')) {
-      this.cuenta.dinero=this.cuenta.dinero.replace(",",".")
-    }
-    this.cuenta.dinero=parseFloat(this.cuenta.dinero).toFixed(2)
-
-    this.calcularBs()
+    this.monto_cop_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (!parts[1] ? (val[val.length-1]==','?',':'') : this.DECIMAL_SEPARATOR + parts[1]);
+    console.log("jaja")
+    console.log(this.monto_cop_screen)
     return this.monto_cop_screen
   };
 
@@ -256,8 +263,8 @@ export class HomePage {
         val=val.join('')
     }
 
-    if(val[val.length-1]==',') {
-      val=val+'00'
+    if(val[val.length-1]=='.') {
+      val=val.replace(/\./g, '');
     }
 
     if (this.GROUP_SEPARATOR === '.') {
@@ -290,7 +297,6 @@ export class HomePage {
     if (monto=='') {
       monto=0
     }
-    this.cuenta.dinero=parseFloat(monto).toFixed(2)
     this.monto_cop_screen=parseFloat(monto).toLocaleString('de-DE')
     this.calcularBs()
   }
@@ -326,6 +332,8 @@ export class HomePage {
     console.log(emptyfills)
     return emptyfills
   }
+
+
 }
 
 
