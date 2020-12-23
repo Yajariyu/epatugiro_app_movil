@@ -228,9 +228,6 @@ export class HomePage {
         return '';
     }
     const val=valString.toString()
-    //const val= this.unFormat(valString)
-    //let value=parseFloat(val)
-    //const monto_screen=value.toLocaleString('de-DE')
     const parts=  this.unFormat(val).split(this.DECIMAL_SEPARATOR);
     this.monto_cop_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (parts.length==2? this.DECIMAL_SEPARATOR + parts[1]:'')
     this.cuenta.dinero=this.monto_cop_screen
@@ -258,6 +255,11 @@ export class HomePage {
         val=[...val].splice(0,indices[1])
         val=val.join('')
     }
+
+    if(val[val.length-1]==',') {
+      val=val+'00'
+    }
+
     if (this.GROUP_SEPARATOR === '.') {
         val=val.replace(/\./g, '');
         return val
@@ -275,26 +277,21 @@ export class HomePage {
        return indices
    }
 
-   checkFinalValue(value){
-    if (value[value.length-1]==',') {
-      value=value.replace(',', '');
-    }
-    if (value[value.length-1]=='.') {
-      value=value.replace('.', '');
-    }
-    this.cuenta.dinero=value
-  }
+
 
   formatnodecimal(monto){
+    monto=monto.toString()
     if(monto.includes('.')) {
       monto=monto.replaceAll(".","")
     }
     if(monto.includes(',')) {
       monto=monto.replace(",",".")
     }
+    if (monto=='') {
+      monto=0
+    }
     this.cuenta.dinero=parseFloat(monto).toFixed(2)
     this.monto_cop_screen=parseFloat(monto).toLocaleString('de-DE')
-    console.log(this.monto_cop_screen)
     this.calcularBs()
   }
 

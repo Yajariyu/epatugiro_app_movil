@@ -74,8 +74,8 @@
         placeholder="Valor consignado en COP $"
         type="number"
         [(ngModel)]="monto_cop_screen"
+        (input)="format($event.target.value)"
         (ionChange)="formatnodecimal($event.target.value)"
-        input="number"
         [ngModelOptions]="{standalone: true}"
       ></ion-input>
     </ion-item>
@@ -166,7 +166,7 @@
 
     <ion-item lines="none">
       <ion-label style="width:100%; margin:0"  >
-        Bancos destinatario
+        Banco destinatario
       </ion-label>
     </ion-item>
 
