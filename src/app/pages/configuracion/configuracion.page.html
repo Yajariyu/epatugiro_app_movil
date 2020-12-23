@@ -15,28 +15,31 @@
         <ion-thumbnail slot="start">
           <img src="assets/factura.png" />
         </ion-thumbnail>
-        <ion-icon
-          *ngIf="transferencia.estado_id == 3"
-          color="success"
-          slot="end"
-          name="checkmark-circle-outline"
-        ></ion-icon>
-        <ion-icon
-          *ngIf="transferencia.estado_id == 2"
-          color="primary"
-          slot="end"
-          name="checkmark-circle-outline"
-        ></ion-icon>
-        <ion-icon
-          *ngIf="transferencia.estado_id == 1"
-          color="warning"
-          slot="end"
-          name="checkmark-circle-outline"
-        ></ion-icon>
-        <ion-label>
-          <h3>Bolivares: {{transferencia.bolivares}}</h3>
-          <p class="ion-text-wrap">Creada:{{ transferencia.created_at }}</p>
+
+        <ion-label >
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                  <h3>Bolivares: {{transferencia.bolivares}}</h3>
+                  <p class="ion-text-wrap">Creada:{{ transferencia.created_at }}</p>
+              </ion-col>
+              <ion-col style="width:100%; display:flex;justify-content:end; text-align:flex-end; align-items: flex-end;">
+                <div class="status" *ngIf="transferencia.estado_id == 1" style="color:#F49C14" >
+                  <p class="ion-text-wrap">Pendiente</p>
+                </div>
+
+                <div class="status" *ngIf="transferencia.estado_id == 2" style="color:blue"   >
+                  <p class="ion-text-wrap">Confirmada</p>
+                </div>
+
+                <div class="status" *ngIf="transferencia.estado_id == 3" style="color:green" >
+                  <p class="ion-text-wrap">Ejecutada</p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-label>
+
         <ion-item-options side="end">
           <ion-item-option>Cargando...</ion-item-option>
         </ion-item-options>

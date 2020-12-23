@@ -38,7 +38,24 @@ export class HomePage {
   public loading: any;
   public DECIMAL_SEPARATOR=",";
   public GROUP_SEPARATOR=".";
+  public monto_bolivar_screen=null
+  public monto_cop_screen=null
+  public mensajes:any= {
+    nombre_emisor:"Falta Nombre del remitente en Colombia",
+    dinero: "Falta Monto en pesos",
+    cedula: "Falta Número del documento del remitente en Colombia",
+    banco_emisor:"Falta Banco en Colombia",
+    numero_cuenta: "Falta Número de documento del destinatario en Venezuela",
+    tipo_cuenta: "Falta Tipo de cuenta",
+    banco_id:  "Falta Banco en Colombia",
+    nombre_receptor:"Falta Nombre del destinatario en Venezuela",
+    numero_cuenta_receptor: "Falta Número de documento del destinatario en Venezuela",
+    tipo_documento: "Falta tipo de documento del destinatario en Venezuela",
+    cedula_emisor: "Falta Número de documento del emisor en Colombia",
+    banco_receptor: "Falta Banco en Venezuela",
+    image:"Falta imagen"
 
+  };
   constructor(
     public alertController: AlertController,
     public auth: AuthService,
@@ -82,9 +99,13 @@ export class HomePage {
       this.cuenta.nombre_receptor == null ||
       this.cuenta.numero_cuenta_receptor == null ||
       this.image == null
+
     ) {
-      alert("Debe rellenar todos los campos");
-      this.loading.dismiss();
+          let msg="Debe rellenar todos los campos\n"
+          const fieldEmpty=this.checkEmptyinputs()
+          fieldEmpty.forEach((name)=>msg+=`${this.mensajes[name]}\n` )
+          alert(msg);
+          this.loading.dismiss();
     } else {
       this.auth
         .crearTransferencia({
@@ -132,17 +153,17 @@ export class HomePage {
     this.cuenta.nombre_receptor = null;
     this.cuenta.numero_cuenta_receptor = null;
     this.image = this.image;
+    this.monto_bolivar_screen=null;
+    this.monto_cop_screen=null;
+
   }
 
   calcularBs() {
-    let monto= this.cuenta.dinero
-    if(monto.includes('.')) {
-      monto=monto.replaceAll(".","")
+    console.log(this.cuenta.dinero)
+    if(this.cuenta.dinero) {
+      this.cuenta.bolivares = (this.cuenta.dinero / this.tasa_cambio).toFixed(2);
+      this.monto_bolivar_screen=parseFloat(this.cuenta.bolivares).toLocaleString('de-DE')
     }
-    if(monto.includes(',')) {
-      monto=monto.replace(",",".")
-    }
-    this.cuenta.bolivares = parseFloat((monto / this.tasa_cambio).toFixed(2));
   }
 
   abrirCamara() {
@@ -211,12 +232,18 @@ export class HomePage {
     //let value=parseFloat(val)
     //const monto_screen=value.toLocaleString('de-DE')
     const parts=  this.unFormat(val).split(this.DECIMAL_SEPARATOR);
-    const monto_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (parts.length==2? this.DECIMAL_SEPARATOR + parts[1]:'')
-    this.cuenta.dinero=monto_screen
-    console.log(this.cuenta.dinero)
-    this.calcularBs()
-    return monto_screen;
+    this.monto_cop_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (parts.length==2? this.DECIMAL_SEPARATOR + parts[1]:'')
+    this.cuenta.dinero=this.monto_cop_screen
+    if(this.cuenta.dinero.includes('.')) {
+      this.cuenta.dinero=this.cuenta.dinero.replaceAll(".","")
+    }
+    if(this.cuenta.dinero.includes(',')) {
+      this.cuenta.dinero=this.cuenta.dinero.replace(",",".")
+    }
+    this.cuenta.dinero=parseFloat(this.cuenta.dinero).toFixed(2)
 
+    this.calcularBs()
+    return this.monto_cop_screen
   };
 
 
@@ -247,9 +274,61 @@ export class HomePage {
        }, []);
        return indices
    }
+
+   checkFinalValue(value){
+    if (value[value.length-1]==',') {
+      value=value.replace(',', '');
+    }
+    if (value[value.length-1]=='.') {
+      value=value.replace('.', '');
+    }
+    this.cuenta.dinero=value
+  }
+
+  formatnodecimal(monto){
+    if(monto.includes('.')) {
+      monto=monto.replaceAll(".","")
+    }
+    if(monto.includes(',')) {
+      monto=monto.replace(",",".")
+    }
+    this.cuenta.dinero=parseFloat(monto).toFixed(2)
+    this.monto_cop_screen=parseFloat(monto).toLocaleString('de-DE')
+    console.log(this.monto_cop_screen)
+    this.calcularBs()
+  }
+
+
+//Function to check emptyfills
+  checkEmptyinputs() {
+    const emptyfills=[]
+    for (var key in this.cuenta) {
+        if(this.cuenta[key]==null) {
+          if(key!="bolivares")
+          emptyfills.push(key)
+        }
+    }
+    if(this.cuenta.nombre_emisor==null) {
+      emptyfills.push("nombre_emisor")
+    }
+    if (this.cuenta.banco_emisor==null){
+      emptyfills.push("banco_emisor")
+    }
+
+    if(this.cuenta.nombre_receptor==null){
+      emptyfills.push("nombre_receptor")
+    }
+
+    if(this.cuenta.tipo_documento==null) {
+      emptyfills.push("tipo_documento")
+    }
+
+    if(this.cuenta.image==null) {
+      emptyfills.push("image")
+    }
+    console.log(emptyfills)
+    return emptyfills
+  }
 }
-
-
-
 
 

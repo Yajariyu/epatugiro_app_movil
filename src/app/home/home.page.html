@@ -71,16 +71,15 @@
 
     <ion-item lines="none">
       <ion-input
-        name="monto"
         placeholder="Valor consignado en COP $"
-        [(ngModel)]="cuenta.dinero"
-        (ionInput)="format($event.target.value)"
-        (ngModelChange)="format($event.target.value)"
+        type="number"
+        [(ngModel)]="monto_cop_screen"
+        (ionChange)="formatnodecimal($event.target.value)"
         input="number"
-        inputmode="decimal"
+        [ngModelOptions]="{standalone: true}"
       ></ion-input>
     </ion-item>
-    {{cuenta.dinero}}
+
 
     <ion-item lines="none" style="margin:0; padding:0">
       <ion-label style="width:100%; margin:0"  >
@@ -91,7 +90,7 @@
     <ion-item lines="none" >
       <ion-input
         placeholder="Valor en Bs a transferir"
-        [(ngModel)]="cuenta.bolivares"
+        [(ngModel)]="monto_bolivar_screen"
         input="number"
         inputmode="decimal"
         disabled
@@ -167,7 +166,7 @@
 
     <ion-item lines="none">
       <ion-label style="width:100%; margin:0"  >
-        Bancos Venezolano que recibe la transferencia
+        Bancos destinatario
       </ion-label>
     </ion-item>
 

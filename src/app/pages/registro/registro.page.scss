@@ -8,12 +8,20 @@
   justify-content: center;
 }
 
-img {
+.register_logo {
   display: block;
   margin: 0 auto;
+  max-width: 50%;
+  min-width: 50%;
+  object-fit: contain;
+}
+.back_image {
+  display: block;
   max-width: 60%;
   padding-top: 5px;
   padding-bottom: 20px;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 @media (max-height: 550px) {
