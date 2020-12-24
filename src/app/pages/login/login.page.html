@@ -1,11 +1,13 @@
 <ion-content class="ion-padding form-content" scrollX="false" scrollY="false">
-  <div class="contenido">
-  <ion-grid style="height: 100%; display:flex; flex-direction: column">
+  <div class="contenido" style="height:100%;">
+  <ion-grid style="height:100%; display: flex; flex-flow: column;">
+    <ion-row style="margin-bottom: 30px;">
+      <img src="assets/icon/favicon.png" id="login_icon"/>
+    </ion-row>
     <ion-row
       class="ion-align-items-center ion-justify-content-center"
-      style="height: 80%; display:flex; flex-direction: column"
+      style="display:flex; flex-direction: column; flex-grow: 1"
     >
-      <img src="assets/icon/favicon.png" id="login_icon"/>
       <form
         class="form"
         [formGroup]="validations_form"
@@ -56,11 +58,9 @@
         </div>
       </form>
     </ion-row>
-
-    <ion-row style="flex-grow: 1; height:100%" class="login_image">
-      <img src="assets/contactenos.png" alt="back_image" class="login_back_image">
+    <ion-row style="flex-grow: 1" class="login_image">
+      <img src="assets/contactenos.png" alt="back_image" class="login_back_image" style="margin:auto;">
     </ion-row>
-
   </ion-grid>
 </div>
 </ion-content>

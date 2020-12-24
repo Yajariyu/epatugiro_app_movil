@@ -43,19 +43,17 @@ export class HomePage {
   public monto=null;
 
   public mensajes:any= {
-    nombre_emisor:"Falta Nombre del remitente en Colombia",
-    dinero: "Falta Monto en pesos",
-    cedula: "Falta Número del documento del remitente en Colombia",
-    banco_emisor:"Falta Banco en Colombia",
-    numero_cuenta: "Falta Número de documento del destinatario en Venezuela",
-    tipo_cuenta: "Falta Tipo de cuenta",
-    banco_id:  "Falta Banco en Colombia",
-    nombre_receptor:"Falta Nombre del destinatario en Venezuela",
-    numero_cuenta_receptor: "Falta Número de documento del destinatario en Venezuela",
-    tipo_documento: "Falta tipo de documento del destinatario en Venezuela",
-    cedula_emisor: "Falta Número de documento del emisor en Colombia",
-    banco_receptor: "Falta Banco en Venezuela",
-    image:"Falta imagen"
+    nombre_emisor:"Nombre del remitente",
+    dinero: "Monto en pesos",
+    banco_emisor:"Banco en Colombia",
+    tipo_cuenta: "Tipo de cuenta del Destinatario",
+    banco_id:  "Banco en Colombia",
+    nombre_receptor:"Nombre del Destinatario",
+    numero_cuenta_receptor: "Número de Cuenta del Destinatario en Venezuela",
+    tipo_documento: "Tipo de documento del Destinatario",
+    cedula_emisor: "Número de documento del Destinatario",
+    banco_receptor: "Banco destinatario",
+    image:"Imagen de la Consignación"
 
   };
   constructor(
@@ -82,7 +80,6 @@ export class HomePage {
       this.tasa_cambio = res.response.tasa_cambio;
       this.bancos_emisores = res.response.emisores;
       this.bancos_receptores = res.response.receptores;
-      console.log(this.bancos_emisores);
     });
   }
 
@@ -103,7 +100,7 @@ export class HomePage {
       this.image == null
 
     ) {
-          let msg="Debe rellenar todos los campos\n"
+          let msg="Por favor diligenciar:\n"
           const fieldEmpty=this.checkEmptyinputs()
           fieldEmpty.forEach((name)=>msg+=`${this.mensajes[name]}\n` )
           alert(msg);
@@ -161,7 +158,7 @@ export class HomePage {
   }
 
   calcularBs() {
-    console.log(this.monto_cop_screen)
+
     this.cuenta.dinero=this.monto_cop_screen
     if(this.cuenta.dinero==0 || this.cuenta.dinero==null) {
       return this.monto_bolivar_screen=parseFloat("0").toLocaleString('de-DE')
@@ -245,8 +242,6 @@ export class HomePage {
     const val=valString.toString()
     const parts=  this.unFormat(val).split(this.DECIMAL_SEPARATOR);
     this.monto_cop_screen=parts[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, this.GROUP_SEPARATOR) + (!parts[1] ? (val[val.length-1]==','?',':'') : this.DECIMAL_SEPARATOR + parts[1]);
-    console.log("jaja")
-    console.log(this.monto_cop_screen)
     return this.monto_cop_screen
   };
 
@@ -286,28 +281,12 @@ export class HomePage {
 
 
 
-  formatnodecimal(monto){
-    monto=monto.toString()
-    if(monto.includes('.')) {
-      monto=monto.replaceAll(".","")
-    }
-    if(monto.includes(',')) {
-      monto=monto.replace(",",".")
-    }
-    if (monto=='') {
-      monto=0
-    }
-    this.monto_cop_screen=parseFloat(monto).toLocaleString('de-DE')
-    this.calcularBs()
-  }
-
-
 //Function to check emptyfills
   checkEmptyinputs() {
     const emptyfills=[]
     for (var key in this.cuenta) {
         if(this.cuenta[key]==null) {
-          if(key!="bolivares")
+          if((key!="bolivares") && (key!="numero_cuenta") && (key!="banco_id") && (key!="cedula"))
           emptyfills.push(key)
         }
     }
@@ -318,12 +297,12 @@ export class HomePage {
       emptyfills.push("banco_emisor")
     }
 
-    if(this.cuenta.nombre_receptor==null){
-      emptyfills.push("nombre_receptor")
+    if (this.cuenta.banco_receptor==null){
+      emptyfills.push("banco_receptor")
     }
 
-    if(this.cuenta.tipo_documento==null) {
-      emptyfills.push("tipo_documento")
+    if(this.cuenta.nombre_receptor==null){
+      emptyfills.push("nombre_receptor")
     }
 
     if(this.cuenta.image==null) {

@@ -37,6 +37,9 @@ export class ConfiguracionPage implements OnInit {
       this.skip += 5;
       this.auth.getTransferencias(this.user.id, this.skip).then((res) => {
         res.forEach((item) => {
+          if(item.bolivares) {
+            item.bolivares=parseFloat(item.bolivares).toLocaleString('de-DE')
+          }
           this.transferencias.push(item);
         });
         console.log(this.transferencias);
